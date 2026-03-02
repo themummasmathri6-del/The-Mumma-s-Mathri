@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | The Mumma's Mathri</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html" class="logo-main"><span class="logo-text">The Mumma's Mathri</span></a>
+        <div class="nav-links">
+            <a href="index.html" data-text="Home"><span>Home</span></a>
+            <a href="products.html" data-text="Order Products"><span>Order Products</span></a>
+            <a href="contact.html" style="color: var(--accent);" data-text="Contact"><span>Contact</span></a>
+        </div>
+        <div style="display: flex; align-items: center;">
+            <div class="account-container">
+                <div id="user-profile" class="account-icon" onclick="toggleAccountMenu()">
+                    <i class="fa-solid fa-user"></i>
+                    <span id="nav-user-name">Login</span>
+                </div>
+                <div id="account-menu" class="account-dropdown">
+                    <p id="dropdown-user-info"></p>
+                    <hr>
+                    <a href="#" onclick="handleLogout()">Logout</a>
+                </div>
+            </div>
+            <div class="cart-icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span id="cart-count">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-photo-style"
+        style="height: 40vh; display: flex; align-items: center; justify-content: center;">
+        <div class="hero-animate">
+            <h1 style="font-size: 3rem; font-weight: 900;">Get in Touch</h1>
+            <p style="color: var(--accent); font-size: 1.4rem; font-style: italic;">We'd love to hear from you!</p>
+        </div>
+    </section>
+
+    <!-- CONTACT GOLD FORM SECTION -->
+    <section class="contact-section-photo">
+        <div class="contact-gold-container">
+            <h2>Reach Our Kitchen</h2>
+            <p style="margin-bottom: 25px; font-weight: 600;">For Orders, Bulk Inquiries or Feedback</p>
+
+            <div style="text-align: left; margin-bottom: 30px; font-weight: 600; display: grid; gap: 15px;">
+                <p><i class="fa-solid fa-location-dot"></i> Parsad gyan chand soni ke makan ke pass, Brijrajpura
+                    patanpol kota Raj. Pin 234006</p>
+                <p><i class="fa-solid fa-phone"></i> +91 9887656441</p>
+                <p><i class="fa-brands fa-whatsapp"></i> WhatsApp: +91 9887656441</p>
+                <p><i class="fa-solid fa-envelope"></i> themummasmathri6@gmail.com</p>
+            </div>
+
+            <form>
+                <input type="text" id="contact-name-page" class="gold-input" placeholder="Your Name" required>
+                <input type="tel" id="contact-phone-page" class="gold-input" placeholder="Mobile Number"
+                    pattern="[0-9]{10}" required>
+                <input type="email" id="contact-email-page" class="gold-input" placeholder="Email Address" required>
+                <textarea id="contact-message-page" class="gold-input" style="height: 120px;"
+                    placeholder="What's on your mind?" required></textarea>
+                <button type="submit" class="btn-red" style="width: 100%; margin-top: 10px;">Send Link to Swad</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 The Mumma's Mathri. Handcrafted with Pure Love.</p>
+    </footer>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeLoginModal()">&times;</span>
+            <i class="fa-solid fa-heart" style="color: var(--primary); font-size: 2.5rem; margin-bottom: 15px;"></i>
+            <h2>Welcome Back!</h2>
+            <p>Enter your 10-digit mobile number to join our family! ❤️</p>
+            <form onsubmit="handleLogin(event)">
+                <input type="text" id="userName" class="login-input" placeholder="Your Full Name" required>
+                <div style="display: flex; gap: 5px; margin-bottom: 15px;">
+                    <input type="text" value="+91" style="width: 50px; text-align: center;" class="login-input"
+                        readonly>
+                    <input type="tel" id="userPhone" class="login-input" placeholder="Login Mobile No."
+                        pattern="[0-9]{10}" title="Please enter a valid 10-digit mobile number" required
+                        style="flex: 1; margin-bottom: 0;">
+                </div>
+                <button type="submit" class="login-btn">Login & Explore</button>
+            </form>
+        </div>
+    </div>
+
+    <a href="https://www.zomato.com/kota" class="zomato-float" target="_blank">
+        <img src="zomato-logo.png" alt="Order on Zomato">
+    </a>
+
+    <a href="https://wa.me/919887656441?text=Hello%20The%20Mumma's%20Mathri!%20I'd%20like%20to%20chat!"
+        class="whatsapp-float" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

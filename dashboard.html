@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | The Mumma's Mathri</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body style="background: #f0f2f5;">
+
+    <div class="dashboard-grid">
+        <aside class="sidebar">
+            <div class="logo" style="margin-bottom: 3rem; color: white;">ADM PANEL</div>
+            <ul class="sidebar-nav">
+                <li><a href="#" class="active"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fa-solid fa-box"></i> Products</a></li>
+                <li><a href="#"><i class="fa-solid fa-cart-shopping"></i> Orders</a></li>
+                <li><a href="#"><i class="fa-solid fa-users"></i> Customers</a></li>
+                <li><a href="#"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                <li style="margin-top: auto; padding-top: 5rem;"><a href="index.html"><i
+                            class="fa-solid fa-arrow-left"></i> View Site</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <h2>Dashboard Overview</h2>
+                <div class="user-profile" style="display: flex; align-items: center; gap: 10px;">
+                    <span>Admin User</span>
+                    <div
+                        style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; color: white;">
+                        A</div>
+                </div>
+            </header>
+
+            <div class="stats-grid">
+                <div class="stats-card">
+                    <h4>Total Revenue</h4>
+                    <div class="value">₹1,24,500</div>
+                    <p style="color: #25d366; font-size: 0.8rem;"><i class="fa-solid fa-arrow-up"></i> 12% from last
+                        month</p>
+                </div>
+                <div class="stats-card">
+                    <h4>Total Orders</h4>
+                    <div class="value">456</div>
+                    <p style="color: #25d366; font-size: 0.8rem;"><i class="fa-solid fa-arrow-up"></i> 8% from last
+                        month</p>
+                </div>
+                <div class="stats-card">
+                    <h4>New Customers</h4>
+                    <div class="value">89</div>
+                    <p style="color: var(--primary); font-size: 0.8rem;"><i class="fa-solid fa-arrow-up"></i> 5% from
+                        last month</p>
+                </div>
+                <div class="stats-card">
+                    <h4>Pending Orders</h4>
+                    <div class="value">12</div>
+                    <p style="color: #ffb74d; font-size: 0.8rem;"><i class="fa-solid fa-clock"></i> Action required</p>
+                </div>
+            </div>
+
+            <div
+                style="background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
+                <h3>Recent Orders</h3>
+                <table style="width: 100%; border-collapse: collapse; margin-top: 1.5rem;">
+                    <thead>
+                        <tr style="text-align: left; border-bottom: 1px solid #eee;">
+                            <th style="padding: 1rem;">Order ID</th>
+                            <th style="padding: 1rem;">Customer</th>
+                            <th style="padding: 1rem;">Product</th>
+                            <th style="padding: 1rem;">Amount</th>
+                            <th style="padding: 1rem;">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #f9f9f9;">
+                            <td style="padding: 1rem;">#ORD-7321</td>
+                            <td style="padding: 1rem;">Rahul Sharma</td>
+                            <td style="padding: 1rem;">Masala Mathri x 2</td>
+                            <td style="padding: 1rem;">₹580</td>
+                            <td style="padding: 1rem;"><span
+                                    style="background: #e8f5e9; color: #2e7d32; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem;">Delivered</span>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #f9f9f9;">
+                            <td style="padding: 1rem;">#ORD-7322</td>
+                            <td style="padding: 1rem;">Anjali Gupta</td>
+                            <td style="padding: 1rem;">Jeera Mathri x 1</td>
+                            <td style="padding: 1rem;">₹270</td>
+                            <td style="padding: 1rem;"><span
+                                    style="background: #fff3e0; color: #ef6c00; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem;">Shipped</span>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #f9f9f9;">
+                            <td style="padding: 1rem;">#ORD-7323</td>
+                            <td style="padding: 1rem;">Vikram Singh</td>
+                            <td style="padding: 1rem;">Classic Mathri x 3</td>
+                            <td style="padding: 1rem;">₹810</td>
+                            <td style="padding: 1rem;"><span
+                                    style="background: #e3f2fd; color: #1565c0; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem;">Pending</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+</body>
+
+</html>

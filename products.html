@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Menu | The Mumma's Mathri</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html" class="logo-main"><span class="logo-text">The Mumma's Mathri</span></a>
+        <div class="nav-links">
+            <a href="index.html" data-text="Home"><span>Home</span></a>
+            <a href="products.html" style="color: var(--accent);" data-text="Order Products"><span>Order
+                    Products</span></a>
+            <a href="contact.html" data-text="Contact"><span>Contact</span></a>
+        </div>
+        <div style="display: flex; align-items: center;">
+            <div class="account-container">
+                <div id="user-profile" class="account-icon" onclick="toggleAccountMenu()">
+                    <i class="fa-solid fa-user"></i>
+                    <span id="nav-user-name">Login</span>
+                </div>
+                <div id="account-menu" class="account-dropdown">
+                    <p id="dropdown-user-info"></p>
+                    <hr>
+                    <a href="#" onclick="handleLogout()">Logout</a>
+                </div>
+            </div>
+            <div class="cart-icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span id="cart-count">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero-photo-style"
+        style="height: 50vh; display: flex; align-items: center; justify-content: center;">
+        <div class="hero-animate">
+            <h1 style="font-size: 3rem; margin-bottom: 10px; font-weight: 900;">Our Delicious Menu</h1>
+            <p style="color: var(--accent); font-size: 1.4rem; font-style: italic;">Made from the heart, for your home.
+            </p>
+        </div>
+    </section>
+
+    <!-- PRODUCTS GRID -->
+    <div class="container" style="padding: 60px 5%;">
+        <h2
+            style="text-align: center; color: var(--secondary); margin-bottom: 40px; font-size: 2.5rem; font-weight: 800;">
+            Freshly Baked Snacks</h2>
+
+        <div id="products-grid" class="product-row-photo">
+            <!-- Products will be injected by script.js -->
+        </div>
+    </div>
+
+    <!-- FEATURES ROW -->
+    <section style="background: var(--bg-light); padding: 40px 0; border-top: 1px solid #ddd;">
+        <div class="container">
+            <div class="badges-row" style="color: var(--secondary);">
+                <div class="badge-item"><i class="fa-solid fa-truck"></i> Fast Delivery</div>
+                <div class="badge-item"><i class="fa-solid fa-shield-heart"></i> 100% Hygienic</div>
+                <div class="badge-item"><i class="fa-solid fa-box-open"></i> Bulk Orders</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 The Mumma's Mathri. Pure Taste, Homemade Love.</p>
+    </footer>
+
+    <a href="https://www.zomato.com/kota" class="zomato-float" target="_blank">
+        <img src="zomato-logo.png" alt="Order on Zomato">
+    </a>
+
+    <a href="https://wa.me/919887656441?text=Hello%20Mumma's%20Mathri%20I%20want%20to%20order" class="whatsapp-float"
+        target="_blank">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeLoginModal()">&times;</span>
+            <i class="fa-solid fa-heart" style="color: var(--primary); font-size: 2.5rem; margin-bottom: 15px;"></i>
+            <h2>Welcome Back!</h2>
+            <p>Enter your 10-digit mobile number to join our family! ❤️</p>
+            <form onsubmit="handleLogin(event)">
+                <input type="text" id="userName" class="login-input" placeholder="Your Full Name" required>
+                <div style="display: flex; gap: 5px; margin-bottom: 15px;">
+                    <input type="text" value="+91" style="width: 50px; text-align: center;" class="login-input"
+                        readonly>
+                    <input type="tel" id="userPhone" class="login-input" placeholder="Login Mobile No."
+                        pattern="[0-9]{10}" title="Please enter a valid 10-digit mobile number" required
+                        style="flex: 1; margin-bottom: 0;">
+                </div>
+                <button type="submit" class="login-btn">Login & Explore</button>
+            </form>
+        </div>
+    </div>
+    <!-- CART MODAL -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <span class="modal-close" onclick="closeCartModal()">&times;</span>
+            <h2 style="color: var(--primary); margin-bottom: 20px;"><i class="fa-solid fa-cart-shopping"></i> Your Cart
+            </h2>
+            <div id="cart-items-list"
+                style="max-height: 300px; overflow-y: auto; text-align: left; margin-bottom: 20px;">
+                <!-- Cart items will be injected here -->
+            </div>
+            <div style="border-top: 2px dashed #ddd; padding-top: 15px; margin-bottom: 20px;">
+                <h3 style="display: flex; justify-content: space-between;">
+                    <span>Total Amount:</span>
+                    <span id="cart-total-modal" style="color: var(--primary);">₹0</span>
+                </h3>
+            </div>
+
+            <div style="display: grid; gap: 10px;">
+                <button onclick="payOnline()" class="login-btn"
+                    style="background: #0070ba; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <i class="fa-solid fa-wallet"></i> Pay Online (UPI/GPay)
+                </button>
+                <button onclick="openWhatsAppOrder()" class="login-btn"
+                    style="background: #25d366; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <i class="fa-brands fa-whatsapp"></i> Confirm on WhatsApp
+                </button>
+            </div>
+            <p style="font-size: 0.8rem; margin-top: 15px; color: #666;">* Payment ke baad screenshot WhatsApp par bhej
+                dein. ❤️</p>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
