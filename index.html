@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Mumma's Mathri | Har bite mein Maa ka pyaar ❤️</title>
+  <meta name="description"
+    content="Authentic, crispy Rajasthani snacks and Mathri from The Mumma's Mathri. Fresh and hygienic homemade taste.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+  <nav>
+    <a href="index.html" class="logo-main"><span class="logo-text">The Mumma's Mathri</span></a>
+    <div class="nav-links">
+      <a href="index.html" data-text="Home"><span>Home</span></a>
+      <a href="products.html" data-text="Order Products"><span>Order Products</span></a>
+      <a href="contact.html" data-text="Contact"><span>Contact</span></a>
+    </div>
+    <div style="display: flex; align-items: center;">
+      <div class="account-container">
+        <div id="user-profile" class="account-icon" onclick="toggleAccountMenu()">
+          <i class="fa-solid fa-user"></i>
+          <span id="nav-user-name">Login</span>
+        </div>
+        <div id="account-menu" class="account-dropdown">
+          <p id="dropdown-user-info"></p>
+          <hr>
+          <a href="#" onclick="handleLogout()">Logout</a>
+        </div>
+      </div>
+      <div class="cart-icon">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span id="cart-count">0</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SECTION 1: HERO SLIDER -->
+  <section class="slider-container">
+    <div class="slide active" style="background-image: url('hero1.png');">
+      <div class="slide-content">
+        <h1>The Mumma's Mathri</h1>
+        <p>Har Bite Mein Maa Ka Pyaar ❤️</p>
+        <a href="products.html" class="btn-red">Order Now</a>
+      </div>
+    </div>
+    <div class="slide" style="background-image: url('hero2.png');">
+      <div class="slide-content">
+        <h1>Traditional Taste</h1>
+        <p>Fresh & Hygienic Homemade Rajasthani Snacks</p>
+        <a href="products.html" class="btn-red">Explore Menu</a>
+      </div>
+    </div>
+    <div class="slide" style="background-image: url('hero3.png');">
+      <div class="slide-content">
+        <h1>Handcrafted with Love</h1>
+        <p>Bringing the authentic taste of Kota to your home</p>
+        <a href="contact.html" class="btn-red">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <footer>
+    <div class="address-box">
+      <span><i class="fa-solid fa-location-dot"></i> Brijrajpura, Patanpol, Kota</span>
+      <span><i class="fa-solid fa-phone"></i> +91 9887656441</span>
+      <span><i class="fa-solid fa-envelope"></i> themummasmathri6@gmail.com</span>
+    </div>
+    <p>&copy; 2026 The Mumma's Mathri. Handcrafted with Pure Love.</p>
+  </footer>
+
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeLoginModal()">&times;</span>
+      <i class="fa-solid fa-heart" style="color: var(--primary); font-size: 2.5rem; margin-bottom: 15px;"></i>
+      <h2>Welcome Back!</h2>
+      <p>Enter your 10-digit mobile number to join our family! ❤️</p>
+      <form onsubmit="handleLogin(event)">
+        <input type="text" id="userName" class="login-input" placeholder="Your Full Name" required>
+        <div style="display: flex; gap: 5px; margin-bottom: 15px;">
+          <input type="text" value="+91" style="width: 50px; text-align: center;" class="login-input" readonly>
+          <input type="tel" id="userPhone" class="login-input" placeholder="Login Mobile No." pattern="[0-9]{10}"
+            title="Please enter a valid 10-digit mobile number" required style="flex: 1; margin-bottom: 0;">
+        </div>
+        <button type="submit" class="login-btn">Login & Explore</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- CART MODAL -->
+  <div id="cartModal" class="modal">
+    <div class="modal-content" style="max-width: 500px;">
+      <span class="modal-close" onclick="closeCartModal()">&times;</span>
+      <h2 style="color: var(--primary); margin-bottom: 20px;"><i class="fa-solid fa-cart-shopping"></i> Your Cart</h2>
+      <div id="cart-items-list" style="max-height: 300px; overflow-y: auto; text-align: left; margin-bottom: 20px;">
+        <!-- Cart items will be injected here -->
+      </div>
+      <div style="border-top: 2px dashed #ddd; padding-top: 15px; margin-bottom: 20px;">
+        <h3 style="display: flex; justify-content: space-between;">
+          <span>Total Amount:</span>
+          <span id="cart-total-modal" style="color: var(--primary);">₹0</span>
+        </h3>
+      </div>
+
+      <div style="display: grid; gap: 10px;">
+        <button onclick="payOnline()" class="login-btn"
+          style="background: #0070ba; display: flex; align-items: center; justify-content: center; gap: 10px;">
+          <i class="fa-solid fa-wallet"></i> Pay Online (UPI/GPay)
+        </button>
+        <button onclick="openWhatsAppOrder()" class="login-btn"
+          style="background: #25d366; display: flex; align-items: center; justify-content: center; gap: 10px;">
+          <i class="fa-brands fa-whatsapp"></i> Confirm on WhatsApp
+        </button>
+      </div>
+      <p style="font-size: 0.8rem; margin-top: 15px; color: #666;">* Payment ke baad screenshot WhatsApp par bhej dein.
+        ❤️</p>
+    </div>
+  </div>
+
+
+  <a href="https://www.zomato.com/kota" class="zomato-float" target="_blank">
+    <img src="zomato-logo.png" alt="Order on Zomato">
+  </a>
+
+  <a href="https://wa.me/919887656441?text=Hello%20The%20Mumma's%20Mathri!%20I'd%20like%20to%20chat!"
+    class="whatsapp-float" target="_blank">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
