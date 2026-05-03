@@ -31,12 +31,57 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 body {
   font-family: 'Outfit', sans-serif;
   background-color: var(--bg-light);
   color: var(--secondary);
   line-height: 1.6;
+  position: relative;
+  z-index: 0;
 }
+
+/* Premium Animated Orb Background */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  z-index: -1;
+  pointer-events: none;
+  animation: floatOrb 20s infinite alternate ease-in-out;
+}
+
+body::before {
+  width: 45vw;
+  height: 45vw;
+  background: rgba(255, 193, 7, 0.15); /* Soft gold/accent */
+  top: -10vw;
+  left: -15vw;
+  animation-duration: 25s;
+}
+
+body::after {
+  width: 55vw;
+  height: 55vw;
+  background: rgba(165, 42, 42, 0.12); /* Soft primary red */
+  bottom: -20vw;
+  right: -15vw;
+  animation-delay: -10s;
+}
+
+@keyframes floatOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(8vw, 8vh) scale(1.1); }
+  100% { transform: translate(-5vw, -8vh) scale(0.9); }
+}
+
 
 /* Red Button Style */
 .btn-red {
@@ -90,8 +135,12 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.3); /* Lighter overlay for general slides */
   z-index: 1;
+}
+
+.slide.active[style*="hero-clean.png"]::before {
+  background: transparent; /* No overlay for the clean starting background */
 }
 
 .slide.active {
@@ -149,11 +198,13 @@ body {
 
 .hero-photo-style {
   position: relative;
-  background: var(--bg-solid);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   padding: 80px 5%;
-  color: #333;
+  color: var(--secondary);
   text-align: center;
-  border-bottom: 5px solid var(--accent);
+  border-bottom: 2px solid rgba(255, 193, 7, 0.5); /* softer accent border */
 }
 
 .about-section-photo {
@@ -211,47 +262,73 @@ body {
 }
 
 .product-card-photo {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 15px;
-  padding: 15px 25px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.45));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 20px 30px;
   color: var(--secondary);
   position: relative;
   display: flex;
   align-items: center;
   gap: 25px;
   text-align: left;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  transition: var(--transition);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Pro Glossy Shine Effect */
+.product-card-photo::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 50%; height: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-20deg);
+  transition: all 0.7s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.product-card-photo:hover::before {
+  left: 200%;
 }
 
 .product-card-photo:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(165, 42, 42, 0.12), 0 0 20px rgba(255, 193, 7, 0.2);
+  border: 1px solid rgba(255, 193, 7, 0.6);
 }
 
 .product-card-photo img {
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
   object-fit: cover;
-  border-radius: 10px;
-  transition: transform 0.5s ease;
+  border-radius: 15px;
+  transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
   flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  z-index: 3;
 }
 
 .product-card-photo:hover img {
-  transform: scale(1.1);
+  transform: scale(1.12) rotate(4deg);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.25);
 }
 
 .product-card-label {
-  background: var(--primary);
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: white;
-  padding: 8px 15px;
-  border-radius: 5px;
+  padding: 6px 14px;
+  border-radius: 6px;
   font-weight: 800;
   text-transform: uppercase;
-  font-size: 0.9rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  font-size: 0.8rem;
+  box-shadow: 0 4px 10px rgba(165, 42, 42, 0.3);
   display: inline-block;
+  letter-spacing: 1px;
 }
 
 
@@ -280,22 +357,77 @@ body {
 
 /* Navbar */
 nav {
-  position: relative;
-  background: transparent;
+  position: sticky;
+  top: 0;
+  background: rgba(255, 252, 245, 0.85); /* Semi-transparent warm cream */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   width: 100%;
-  padding: 20px 5%;
+  padding: 12px 8%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 1000;
+  border-bottom: 2px solid rgba(240, 230, 204, 0.6);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
 }
 
 .nav-links a {
-  color: #333;
+  color: #000;
   text-decoration: none;
-  margin-left: 25px;
-  font-weight: 600;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  font-weight: 800;
+  font-size: 1.1rem;
+  position: relative;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: column;
+  height: 30px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.nav-links a::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 100%;
+  left: 10px;
+  color: var(--primary);
+  transition: all 0.4s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.nav-links a span {
+  transition: all 0.4s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.nav-links a:hover span {
+  transform: translateY(-120%);
+}
+
+.nav-links a:hover::before {
+  top: 5px;
+}
+
+/* Unique Floating Underline */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
 }
 
 .logo-main {
@@ -305,12 +437,12 @@ nav {
 }
 
 .logo-text {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 900;
-  color: var(--accent-solid);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  transition: none;
+  color: var(--primary);
+  text-transform: none;
+  letter-spacing: 0;
+  transition: var(--transition);
 }
 
 .logo-main:hover .logo-text {
@@ -447,107 +579,120 @@ nav {
   margin: 10px 0;
 }
 
-/* --- MOBILE RESPONSIVENESS --- */
+/* --- MOBILE RESPONSIVENESS (App Style) --- */
 @media (max-width: 768px) {
 
-  /* Navigation */
+  /* Fix layout for bottom nav */
+  body {
+    padding-bottom: 70px;
+    /* Space for bottom nav */
+  }
+
+  /* Compact Top Navbar */
   nav {
-    padding: 15px 4%;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
+    padding: 10px 4%;
+    justify-content: space-between !important;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(253, 250, 240, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
 
   .nav-links {
-    order: 3;
+    display: none !important;
+    /* Hide old nav links on mobile */
+  }
+
+  .logo-text {
+    font-size: 1.2rem;
+  }
+
+  /* Bottom Navigation Bar */
+  .mobile-bottom-nav {
+    display: flex !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
     width: 100%;
+    height: 65px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.1);
+    z-index: 2000;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #eee;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .nav-item {
+    text-decoration: none;
+    color: #888;
     display: flex;
-    justify-content: center;
-    background: #f8f9fa;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    margin-top: 10px;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.7rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
   }
 
-  .nav-links a {
-    margin: 0 10px;
-    font-size: 0.9rem;
+  .nav-item i {
+    font-size: 1.3rem;
+    margin-bottom: 4px;
   }
 
-  .logo-img {
-    height: 80px;
-    /* Smaller logo for mobile */
+  .nav-item.active {
+    color: var(--primary);
   }
 
-  /* Hero Section */
-  .hero-photo-style h1 {
-    font-size: 2.2rem !important;
-  }
-
-  .hero-photo-style p {
-    font-size: 1.2rem !important;
-  }
-
-  /* Contact Form */
-  .contact-gold-container {
-    padding: 25px 15px;
-    margin: 10px;
-    border-radius: 15px;
-  }
-
-  .contact-gold-container h2 {
-    font-size: 1.8rem;
-  }
-
-  /* Product Grid */
+  /* App Style Product Cards */
   .product-row-photo {
-    grid-template-columns: 1fr;
-    /* Single column on smallest screens */
-    gap: 20px;
+    grid-template-columns: 1fr 1fr !important;
+    /* 2 columns on mobile for app look */
+    gap: 12px;
+    padding: 10px;
   }
 
   .product-card-photo {
-    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 12px;
   }
 
-  /* Account & Cart Icons */
-  .account-container {
-    margin-left: 10px;
+  .product-card-photo img {
+    width: 100%;
+    height: 140px;
   }
 
-  .cart-icon {
-    margin-left: 10px;
+  .qty-control {
+    gap: 5px;
+    padding: 3px;
   }
 
-  #nav-user-name {
-    display: none;
-    /* Only show icon on mobile navbar to save space */
+  .qty-btn {
+    width: 25px;
+    height: 25px;
+    font-size: 1rem;
   }
 
-  /* Badges */
-  .badges-row {
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-  }
-
-  /* Modal */
-  .modal-content {
-    padding: 25px 20px;
-    width: 95%;
+  /* Full Width Buttons */
+  .btn-red {
+    padding: 8px 5px !important;
+    font-size: 0.75rem !important;
   }
 }
 
-@media (max-width: 480px) {
-  .hero-photo-style h1 {
-    font-size: 1.8rem !important;
-  }
+/* Hide bottom nav on desktop */
+.mobile-bottom-nav {
+  display: none;
+}
 
-  .btn-red {
-    padding: 10px 20px;
-    font-size: 1rem;
-    width: 100%;
+@media (max-width: 480px) {
+  .product-row-photo {
+    grid-template-columns: 1fr 1fr !important;
   }
 }
 
@@ -825,69 +970,43 @@ footer {
   }
 }
 
-/* Zomato Floating Button */
-.zomato-float {
-  position: fixed;
-  bottom: 105px;
-  right: 30px;
-  width: 60px;
-  height: 60px;
-  background-color: #E23744;
-  border-radius: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-  z-index: 9999;
-  text-decoration: none;
-  transition: all 0.3s ease;
+/* INVOICE STYLES */
+.invoice-container {
+    padding: 10px;
+}
+.invoice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+.invoice-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+}
+.invoice-table th {
+    background: #f8f9fa;
+    text-align: left;
+    padding: 12px;
+    border-bottom: 2px solid #eee;
+    color: #333;
+}
+.invoice-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+.invoice-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    align-items: flex-end;
 }
 
-.zomato-float img {
-  width: 70%;
-  height: 70%;
-  object-fit: contain;
-  border-radius: 5px;
-}
-
-.zomato-float:hover {
-  transform: scale(1.1) rotate(-5deg);
-  background-color: #cb202d;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
-}
-
-.zomato-float::after {
-  content: 'Order on Zomato!';
-  position: absolute;
-  right: 70px;
-  background: white;
-  color: #333;
-  padding: 5px 12px;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  white-space: nowrap;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-}
-
-.zomato-float:hover::after {
-  opacity: 1;
-  visibility: visible;
-  right: 75px;
-}
-
-@media (max-width: 768px) {
-  .zomato-float {
-    bottom: 85px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-  }
-
-  .zomato-float::after {
-    display: none;
-  }
+@media print {
+    body * { visibility: hidden; }
+    #billModal, #billModal * { visibility: visible; }
+    #bill-content, #bill-content * { visibility: visible; }
+    #billModal { position: absolute; left: 0; top: 0; background: white; width: 100%; }
+    .modal-close, button { display: none !important; }
 }

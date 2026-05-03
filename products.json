@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Special Atta Suji Lambi Mathri",
+    "price": 270,
+    "img": "https://images.unsplash.com/photo-1601050690597-df056fb1779f?auto=format&fit=crop&q=80&w=800&v=1",
+    "label": "Atta Suji"
+  },
+  {
+    "id": 2,
+    "name": "Only Maida Lambi Mathri",
+    "price": 270,
+    "img": "https://images.unsplash.com/photo-1626132646529-5003375a9541?auto=format&fit=crop&q=80&w=800&v=1",
+    "label": "Maida Special"
+  },
+  {
+    "id": 3,
+    "name": "Maida Suji Lambi Mathri",
+    "price": 270,
+    "img": "https://images.unsplash.com/photo-1589113103503-49453730c91d?auto=format&fit=crop&q=80&w=800&v=1",
+    "label": "Maida Suji"
+  },
+  {
+    "id": 4,
+    "name": "Masala Kaju",
+    "price": 270,
+    "img": "masala-kaju.png?v=1",
+    "label": "Maida Special"
+  },
+  {
+    "id": 5,
+    "name": "Simple Kaju",
+    "price": 270,
+    "img": "simple-kaju.png?v=1",
+    "label": "Maida Special"
+  },
+  {
+    "id": 6,
+    "name": "Special Methi Lambi Mathri",
+    "price": 270,
+    "img": "https://images.unsplash.com/photo-1543353071-873f17a7a088?auto=format&fit=crop&q=80&w=800&v=1",
+    "label": "Methi Special"
+  }
+]

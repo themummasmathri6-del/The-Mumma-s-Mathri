@@ -11,6 +11,13 @@
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Mobile App Optimization (PWA) -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#a52a2a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="logo-icon-192.png">
 </head>
 
 <body>
@@ -42,13 +49,22 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <section class="hero-photo-style"
-        style="height: 50vh; display: flex; align-items: center; justify-content: center;">
-        <div class="hero-animate">
-            <h1 style="font-size: 3rem; margin-bottom: 10px; font-weight: 900;">Our Delicious Menu</h1>
-            <p style="color: var(--accent); font-size: 1.4rem; font-style: italic;">Made from the heart, for your home.
-            </p>
+    <!-- HERO SECTION REDESIGN -->
+    <section style="padding: 60px 5%; display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+        <div style="background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 2px solid rgba(255, 255, 255, 0.8); border-radius: 30px; padding: 60px 40px; text-align: center; max-width: 800px; width: 100%; box-shadow: 0 20px 40px rgba(0,0,0,0.08); position: relative; overflow: hidden; transform: translateY(0); transition: all 0.4s ease;">
+            
+            <!-- Decorative glowing orbs inside the card -->
+            <div style="position: absolute; top: -50px; left: -50px; width: 200px; height: 200px; background: var(--accent); border-radius: 50%; filter: blur(50px); opacity: 0.4; z-index: -1;"></div>
+            <div style="position: absolute; bottom: -50px; right: -50px; width: 200px; height: 200px; background: var(--primary); border-radius: 50%; filter: blur(50px); opacity: 0.2; z-index: -1;"></div>
+
+            <h1 style="font-size: 3.8rem; margin-bottom: 15px; font-weight: 900; color: var(--secondary); letter-spacing: -1px;">Our Delicious Menu</h1>
+            <p style="color: var(--primary); font-size: 1.5rem; font-style: italic; font-weight: 600;">Handcrafted from the heart, straight to your home. ❤️</p>
+            
+            <div style="margin-top: 35px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <span style="background: rgba(255, 255, 255, 0.8); padding: 10px 20px; border-radius: 30px; font-size: 1rem; font-weight: 800; color: var(--secondary); box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.9);"><i class="fa-solid fa-leaf" style="color: #4CAF50; margin-right: 5px;"></i> Pure Veg</span>
+                <span style="background: rgba(255, 255, 255, 0.8); padding: 10px 20px; border-radius: 30px; font-size: 1rem; font-weight: 800; color: var(--secondary); box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.9);"><i class="fa-solid fa-cookie-bite" style="color: var(--accent); margin-right: 5px;"></i> Freshly Baked</span>
+                <span style="background: rgba(255, 255, 255, 0.8); padding: 10px 20px; border-radius: 30px; font-size: 1rem; font-weight: 800; color: var(--secondary); box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.9);"><i class="fa-solid fa-heart" style="color: var(--primary); margin-right: 5px;"></i> Made with Love</span>
+            </div>
         </div>
     </section>
 
@@ -64,7 +80,7 @@
     </div>
 
     <!-- FEATURES ROW -->
-    <section style="background: var(--bg-light); padding: 40px 0; border-top: 1px solid #ddd;">
+    <section style="background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 40px 0; border-top: 1px solid rgba(221, 221, 221, 0.5);">
         <div class="container">
             <div class="badges-row" style="color: var(--secondary);">
                 <div class="badge-item"><i class="fa-solid fa-truck"></i> Fast Delivery</div>
@@ -78,9 +94,6 @@
         <p>&copy; 2026 The Mumma's Mathri. Pure Taste, Homemade Love.</p>
     </footer>
 
-    <a href="https://www.zomato.com/kota" class="zomato-float" target="_blank">
-        <img src="zomato-logo.png" alt="Order on Zomato">
-    </a>
 
     <a href="https://wa.me/919887656441?text=Hello%20Mumma's%20Mathri%20I%20want%20to%20order" class="whatsapp-float"
         target="_blank">
@@ -106,6 +119,7 @@
             </form>
         </div>
     </div>
+
     <!-- CART MODAL -->
     <div id="cartModal" class="modal">
         <div class="modal-content" style="max-width: 500px;">
@@ -123,6 +137,13 @@
                 </h3>
             </div>
 
+            <!-- QR CODE SECTION (Shown on Payment Click) -->
+            <div id="qr-payment-section" style="display: none; text-align: center; margin-bottom: 20px;">
+                <p style="font-size: 0.9rem; margin-bottom: 10px; color: var(--secondary);">Scan this QR Code to pay:</p>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=9694847778@ptaxis%26pn=The%20Mumma%20Mathri%26cu=INR" alt="Payment QR Code" style="width: 250px; border: 2px solid #eee; border-radius: 12px; padding: 10px; background: white;">
+                <p style="font-weight: bold; margin-top: 10px; color: var(--primary);">9694847778@ptaxis</p>
+            </div>
+
             <div style="display: grid; gap: 10px;">
                 <button onclick="payOnline()" class="login-btn"
                     style="background: #0070ba; display: flex; align-items: center; justify-content: center; gap: 10px;">
@@ -138,6 +159,41 @@
         </div>
     </div>
 
+    <!-- MOBILE BOTTOM NAV -->
+    <div class="mobile-bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+        <a href="products.html" class="nav-item active">
+            <i class="fa-solid fa-cookie-bite"></i>
+            <span>Products</span>
+        </a>
+        <a href="contact.html" class="nav-item">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span>Contact</span>
+        </a>
+        <a href="#" class="nav-item" onclick="openCartModal()">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>Cart</span>
+        </a>
+    </div>
+
+    <!-- BILL MODAL -->
+    <div id="billModal" class="modal">
+        <div class="modal-content" style="max-width: 800px; background: white;">
+            <span class="modal-close" onclick="closeBillModal()">&times;</span>
+            <div id="bill-content"></div>
+            <div style="margin-top: 30px; text-align: center; display: flex; gap: 10px; justify-content: center;">
+                <button onclick="printBill()" class="login-btn" style="flex: 1; max-width: 200px;">
+                    <i class="fa-solid fa-print"></i> Print Bill
+                </button>
+                <button onclick="closeBillModal()" class="login-btn" style="flex: 1; max-width: 200px; background: #eee; color: #333;">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

@@ -13,6 +13,13 @@
     rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Mobile App Optimization (PWA) -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#a52a2a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="logo-icon-192.png">
 </head>
 
 <body>
@@ -44,12 +51,13 @@
   </nav>
 
   <!-- SECTION 1: HERO SLIDER -->
-  <section class="slider-container">
-    <div class="slide active" style="background-image: url('hero1.png');">
-      <div class="slide-content">
-        <h1>The Mumma's Mathri</h1>
-        <p>Har Bite Mein Maa Ka Pyaar ❤️</p>
-        <a href="products.html" class="btn-red">Order Now</a>
+  <section class="slider-container" style="height: 100vh;">
+    <div class="slide active" style="background-image: url('hero-clean.png'); background-size: cover; background-position: center;">
+      <div class="slide-content" style="background: transparent;">
+        <!-- Names/Pvt text removed from top as requested -->
+        <div style="margin-top: 50vh;">
+          <a href="products.html" class="btn-red" style="font-size: 1.5rem; padding: 15px 40px; box-shadow: 0 10px 25px rgba(124, 34, 20, 0.4);">Order Now</a>
+        </div>
       </div>
     </div>
     <div class="slide" style="background-image: url('hero2.png');">
@@ -113,6 +121,13 @@
         </h3>
       </div>
 
+      <!-- QR CODE SECTION (Shown on Payment Click) -->
+      <div id="qr-payment-section" style="display: none; text-align: center; margin-bottom: 20px;">
+        <p style="font-size: 0.9rem; margin-bottom: 10px; color: var(--secondary);">Scan this QR Code to pay:</p>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=9694847778@ptaxis%26pn=The%20Mumma%20Mathri%26cu=INR" alt="Payment QR Code" style="width: 250px; border: 2px solid #eee; border-radius: 12px; padding: 10px; background: white;">
+        <p style="font-weight: bold; margin-top: 10px; color: var(--primary);">9694847778@ptaxis</p>
+      </div>
+
       <div style="display: grid; gap: 10px;">
         <button onclick="payOnline()" class="login-btn"
           style="background: #0070ba; display: flex; align-items: center; justify-content: center; gap: 10px;">
@@ -129,14 +144,47 @@
   </div>
 
 
-  <a href="https://www.zomato.com/kota" class="zomato-float" target="_blank">
-    <img src="zomato-logo.png" alt="Order on Zomato">
-  </a>
 
   <a href="https://wa.me/919887656441?text=Hello%20The%20Mumma's%20Mathri!%20I'd%20like%20to%20chat!"
     class="whatsapp-float" target="_blank">
     <i class="fa-brands fa-whatsapp"></i>
   </a>
+
+  <!-- MOBILE BOTTOM NAV -->
+  <div class="mobile-bottom-nav">
+    <a href="index.html" class="nav-item active">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </a>
+    <a href="products.html" class="nav-item">
+      <i class="fa-solid fa-cookie-bite"></i>
+      <span>Products</span>
+    </a>
+    <a href="contact.html" class="nav-item">
+      <i class="fa-solid fa-paper-plane"></i>
+      <span>Contact</span>
+    </a>
+    <a href="#" class="nav-item" onclick="openCartModal()">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span>Cart</span>
+    </a>
+  </div>
+
+  <!-- BILL MODAL -->
+  <div id="billModal" class="modal">
+    <div class="modal-content" style="max-width: 800px; background: white;">
+      <span class="modal-close" onclick="closeBillModal()">&times;</span>
+      <div id="bill-content"></div>
+      <div style="margin-top: 30px; text-align: center; display: flex; gap: 10px; justify-content: center;">
+        <button onclick="printBill()" class="login-btn" style="flex: 1; max-width: 200px;">
+          <i class="fa-solid fa-print"></i> Print Bill
+        </button>
+        <button onclick="closeBillModal()" class="login-btn" style="flex: 1; max-width: 200px; background: #eee; color: #333;">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

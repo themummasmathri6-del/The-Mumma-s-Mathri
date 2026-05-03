@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication | The Mumma's Mathri</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .auth-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            max-width: 450px;
+            width: 100%;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255,255,255,0.5);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative Elements */
+        .auth-container::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(124, 34, 20, 0.05); /* Brand Primary */
+            border-radius: 50%;
+            filter: blur(20px);
+            z-index: 0;
+        }
+
+        .auth-container::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 183, 77, 0.1); /* Brand Secondary */
+            border-radius: 50%;
+            filter: blur(20px);
+            z-index: 0;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-area h1 {
+            color: var(--primary, #7c2214);
+            font-size: 2rem;
+            margin-bottom: 5px;
+            font-weight: 800;
+        }
+
+        .logo-area p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: #333;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: 2px solid #eee;
+            background: #fdfdfd;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary, #7c2214);
+            box-shadow: 0 0 0 4px rgba(124, 34, 20, 0.1);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary, #7c2214);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(124, 34, 20, 0.2);
+            margin-top: 15px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(124, 34, 20, 0.3);
+        }
+
+        .btn-primary:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .toggle-text {
+            margin-top: 20px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .toggle-text span {
+            color: var(--primary, #7c2214);
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* Alert Toast */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 16px;
+            position: fixed;
+            z-index: 10;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: opacity 0.3s, bottom 0.3s;
+            opacity: 0;
+        }
+
+        #toast.show {
+            visibility: visible;
+            bottom: 50px;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container">
+        
+        <!-- LOGIN FORM -->
+        <div id="loginForm" class="content-wrapper">
+            <div class="logo-area">
+                <h1>Welcome Back</h1>
+                <p>Login to access your delicious mathri orders</p>
+            </div>
+
+            <form onsubmit="handleLogin(event)">
+                <div class="input-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" placeholder="e.g. you@example.com" required>
+                </div>
+                <div class="input-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="btn-primary" id="btnLogin">Login <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
+            </form>
+
+            <div class="toggle-text">
+                Don't have an account? <span onclick="toggleForm('register')">Register here</span>
+            </div>
+            
+            <a href="index.html" style="display: block; margin-top: 20px; color: #999; text-decoration: none; font-size: 0.85rem;"><i class="fa-solid fa-house"></i> Back to Home</a>
+        </div>
+
+        <!-- REGISTER FORM -->
+        <div id="registerForm" class="content-wrapper" style="display: none;">
+            <div class="logo-area">
+                <h1>Create Account</h1>
+                <p>Sign up to start ordering our traditional snacks</p>
+            </div>
+
+            <form onsubmit="handleRegister(event)">
+                <div class="input-group">
+                    <label for="regName">Full Name</label>
+                    <input type="text" id="regName" placeholder="e.g. Rahul Sharma" required>
+                </div>
+                <div class="input-group">
+                    <label for="regEmail">Email Address</label>
+                    <input type="email" id="regEmail" placeholder="e.g. you@example.com" required>
+                </div>
+                <div class="input-group">
+                    <label for="regPassword">Password</label>
+                    <input type="password" id="regPassword" placeholder="••••••••" required minlength="6">
+                </div>
+
+                <button type="submit" class="btn-primary" id="btnRegister">Create Account</button>
+            </form>
+
+            <div class="toggle-text">
+                Already have an account? <span onclick="toggleForm('login')">Login here</span>
+            </div>
+            
+            <a href="index.html" style="display: block; margin-top: 20px; color: #999; text-decoration: none; font-size: 0.85rem;"><i class="fa-solid fa-house"></i> Back to Home</a>
+        </div>
+
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast">Message here</div>
+
+    <script>
+        const API_URL = "http://localhost:5000/api/auth";
+
+        function showToast(message, isError = false) {
+            const toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.style.backgroundColor = isError ? "#d32f2f" : "#2e7d32";
+            toast.className = "show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+
+        function toggleForm(type) {
+            if (type === 'register') {
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('registerForm').style.display = 'block';
+            } else {
+                document.getElementById('registerForm').style.display = 'none';
+                document.getElementById('loginForm').style.display = 'block';
+            }
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            const btn = document.getElementById('btnLogin');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Logging in...`;
+            btn.disabled = true;
+
+            try {
+                const res = await fetch(`${API_URL}/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await res.json();
+                
+                if (res.ok) {
+                    showToast("Login Successful!");
+                    localStorage.setItem("auth_token", data.token);
+                    localStorage.setItem("user_name", data.user.name);
+                    
+                    setTimeout(() => {
+                        window.location.href = "dashboard.html";
+                    }, 1000);
+                } else {
+                    showToast(data.error || "Login Failed", true);
+                }
+            } catch (err) {
+                showToast("Server offline. Please try again.", true);
+            } finally {
+                btn.innerHTML = `Login <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i>`;
+                btn.disabled = false;
+            }
+        }
+
+        async function handleRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById('regName').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const password = document.getElementById('regPassword').value;
+
+            const btn = document.getElementById('btnRegister');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Registering...`;
+            btn.disabled = true;
+
+            try {
+                const res = await fetch(`${API_URL}/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    showToast("Registration Successful! Please login.");
+                    document.getElementById('loginEmail').value = email; // Pre-fill login
+                    // Switch back to login form
+                    setTimeout(() => {
+                        toggleForm('login');
+                    }, 1000);
+                } else {
+                    showToast(data.error || "Registration Failed", true);
+                }
+            } catch (err) {
+                showToast("Server offline. Please try again.", true);
+            } finally {
+                btn.innerHTML = `Create Account`;
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
